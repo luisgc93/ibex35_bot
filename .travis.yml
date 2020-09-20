@@ -5,4 +5,5 @@ cache: pip
 install:
   - pip install -r requirements.txt
 script:
-  - isort .
+  - isort src/
+  - flake8 src/
