@@ -1,6 +1,8 @@
+APScheduler==3.0.0
 lxml
 nltk
 requests
 twitter
 isort
 flake8
+flask
