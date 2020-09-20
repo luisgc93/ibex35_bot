@@ -2,3 +2,5 @@ lxml
 nltk
 requests
 twitter
+isort~=4.3.21
+flake8
