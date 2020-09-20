@@ -1,0 +1,10 @@
+.idea
+*.pyc
+/staticfiles/
+/static/
+
+# virtualenv
+.venv
+venv/
+
+credentials.py
