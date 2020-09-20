@@ -1,11 +1,12 @@
-from lxml.html import fromstring
-import nltk
-import requests
-from twitter import OAuth, Twitter
 import random
 
-import credentials
-from const import HEADERS, TW_CHAR_LIMIT
+import nltk
+import requests
+from lxml.html import fromstring
+from twitter import OAuth, Twitter
+
+from src import credentials
+from src.const import HEADERS, TW_CHAR_LIMIT
 
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
@@ -24,10 +25,15 @@ def parse_links(links):
         link = 'https://' + link[2:]
     return link
 
+
 def scrape_el_economista():
-    response = requests.get('https://www.eleconomista.es/mercados-cotizaciones/', headers=HEADERS)
+    response = requests.get(
+        'https://www.eleconomista.es/mercados-cotizaciones/',
+        headers=HEADERS)
     tree = fromstring(response.content)
-    links = tree.xpath('//div[@class="firstContent-centerColumn col-xl-5 col-lg-5 col-md-12 col-12 order-1 order-md-1 order-lg-2"]//a/@href')
+    links = tree.xpath('//div[@class="firstContent-centerColumn '
+                       'col-xl-5 col-lg-5 col-md-12 col-12 order-1 order-md-1 '
+                       'order-lg-2"]//a/@href')
     link = parse_links(links)
     response = requests.get(link, headers=HEADERS)
     blog_tree = fromstring(response.content)
