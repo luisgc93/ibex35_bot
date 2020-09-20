@@ -1,8 +1,3 @@
-deploy:
-  provider: heroku
-  api_key:
-    secure: HxvO8WQ4gw9UNUH06aV37SFRlD2Mq1Df1qxQ+hUw2wYKtyTCLrbkW/PALtWXV/y49LUJVob4xofkstJwm3J6GwPl/vfqXa2Et6IJ34rSfA/pQ9s8zK0QgcWvgwBZ/i0rX+P/vUAMjmWwl8hbkJ+Zg/9I0xdGD4hlKVBzh5w0EEubtmPx7zALCShr/vCBEkRUIDfQGY1ZVlGrXK9KscDxpYlxX9/bqwpRV28RcwYiN6is+hTQ8whsgeAtwE/Js2B3o6K0n+pEUTEviixalAFdYmx9p8a4ZWzRUxA9+3JPrYd1Nfw+L1p69d9L9dUwssYMFGgmWPshGPw8X7xqvWQgMh25wEMoVodoU+9H0Rq+dnUdHS5MmheDY29nHjBE6mGMy2r5+8fXECK47cTchqpSelx4PI8OhMSNwns/3O9TH6xdYiZStWRiQoFhP04HJ6HT5ZJkoxof48avghk7/GZ8GXJKz2zf3fMwH5Kp7xMwOV9petiwekWwbs5y0WKWYjn9+06ZuG5OUU77t6RPpiQPKoX2cNbQVAvk3d7E/wOyOCHud/mJp21eaJaD4k10HOKZNltQJFM2Ep0+Dbb0auXXY7aTNvBHWM9+d7pDwumaShK4+AfRKSlwGuCP8H1QRvhT0wTct6tkEjF7f5jt6VU37UBTrNyF1J5dbl/peSApoEc=
-language: python
 python:
 - '3.8'
 cache: pip
