@@ -8,7 +8,7 @@ from twitter import OAuth, Twitter
 
 from .const import HEADERS, TW_CHAR_LIMIT
 
-tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+tokenizer = nltk.download('punkt')
 
 oauth = OAuth(
         os.environ.get('ACCESS_TOKEN'),
