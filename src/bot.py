@@ -49,7 +49,7 @@ def scrape_el_economista():
     sub_header = blog_tree.xpath('//h2/text()')[0]
     tokenized_para = tokenizer.tokenize(para)
     text = sub_header + '. ' + random.choice(tokenized_para)
-    t.statuses.update(status=f"{text[:TW_CHAR_LIMIT]}{link}")
+    t.statuses.update(status=f"{text[:TW_CHAR_LIMIT]} {link}")
 
 
 scrape_el_economista()
