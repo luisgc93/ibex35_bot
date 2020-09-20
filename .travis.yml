@@ -2,7 +2,7 @@ python:
 - '3.8'
 cache: pip
 install:
-- pip install -r requirements.txt
+- pip3 install -r requirements.txt
 script:
 - isort
 - flake8
