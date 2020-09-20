@@ -6,7 +6,7 @@ import requests
 from lxml.html import fromstring
 from twitter import OAuth, Twitter
 
-from .const import HEADERS, TW_CHAR_LIMIT
+from src.const import HEADERS
 
 tokenizer = nltk.download('punkt')
 
@@ -41,7 +41,8 @@ def scrape_el_economista():
     sub_header = blog_tree.xpath('//h2/text()')[0]
     tokenized_para = tokenizer.tokenize(para)
     text = sub_header + '. ' + random.choice(tokenized_para)
-    t.statuses.update(status=f"{text[:TW_CHAR_LIMIT]}{link}")
+    breakpoint()
+    #t.statuses.update(status=f"{text[:TW_CHAR_LIMIT]}{link}")
 
 
 scrape_el_economista()
