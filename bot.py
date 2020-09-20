@@ -2,6 +2,7 @@ from lxml.html import fromstring
 import nltk
 import requests
 from twitter import OAuth, Twitter
+import random
 
 import credentials
 from const import HEADERS, TW_CHAR_LIMIT
@@ -26,8 +27,11 @@ def scrape_el_economista():
         link = 'https://' + link[2:]
     response = requests.get(link, headers=HEADERS)
     blog_tree = fromstring(response.content)
-    paragraph = blog_tree.xpath('//p/text()')[0]
-    t.statuses.update(status=f"{paragraph[:TW_CHAR_LIMIT]}{link}")
+    para = blog_tree.xpath('//p/text()')[0]
+    sub_header = blog_tree.xpath('//h2/text()')[3]
+    tokenized_para = tokenizer.tokenize(para)
+    text = sub_header + '. ' + random.choice(tokenized_para)
+    t.statuses.update(status=f"{text[:TW_CHAR_LIMIT]}{link}")
 
 
 scrape_el_economista()
