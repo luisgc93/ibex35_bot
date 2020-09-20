@@ -6,8 +6,6 @@ import requests
 from lxml.html import fromstring
 from twitter import OAuth, Twitter
 
-from src.const import HEADERS
-
 tokenizer = nltk.download('punkt')
 
 oauth = OAuth(
@@ -17,6 +15,14 @@ oauth = OAuth(
         os.environ.get('CONSUMER_SECRET')
     )
 t = Twitter(auth=oauth)
+
+TW_CHAR_LIMIT = 280
+
+HEADERS = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4)'
+                      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) '
+                      'Safari/537.36'
+    }
 
 
 def parse_links(links):
