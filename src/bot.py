@@ -5,8 +5,8 @@ import requests
 from lxml.html import fromstring
 from twitter import OAuth, Twitter
 
-from src import credentials
-from src.const import HEADERS, TW_CHAR_LIMIT
+from . import credentials
+from .const import HEADERS, TW_CHAR_LIMIT
 
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
