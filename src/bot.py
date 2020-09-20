@@ -1,3 +1,4 @@
+import os
 import random
 
 import nltk
@@ -11,10 +12,10 @@ from .const import HEADERS, TW_CHAR_LIMIT
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
 oauth = OAuth(
-        credentials.ACCESS_TOKEN,
-        credentials.ACCESS_TOKEN_SECRET,
-        credentials.CONSUMER_KEY,
-        credentials.CONSUMER_SECRET
+        os.environ.get('ACCESS_TOKEN'),
+        os.environ.get('ACCESS_TOKEN_SECRET'),
+        os.environ.get('CONSUMER_KEY'),
+        os.environ.get('CONSUMER_SECRET')
     )
 t = Twitter(auth=oauth)
 
