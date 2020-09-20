@@ -1,9 +1,5 @@
-import random
-import time
-
 from lxml.html import fromstring
 import nltk
-# nltk.download('punkt')
 import requests
 from twitter import OAuth, Twitter
 
@@ -30,7 +26,6 @@ def scrape_el_economista():
         link = 'https://' + link[2:]
     response = requests.get(link, headers=HEADERS)
     blog_tree = fromstring(response.content)
-    title = blog_tree.xpath('//h1/text()')[0]
     paragraph = blog_tree.xpath('//p/text()')[0]
     t.statuses.update(status=f"{paragraph[:TW_CHAR_LIMIT]}{link}")
 
