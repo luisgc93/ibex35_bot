@@ -4,6 +4,5 @@ nltk
 requests
 twitter
 isort
-flask
 beautifulsoup4
 black
