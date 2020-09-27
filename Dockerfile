@@ -8,4 +8,4 @@ RUN pip install -r /code/requirements.txt
 
 COPY . /code/
 
-CMD python -m src/clock.py
+CMD python -m src/clock
