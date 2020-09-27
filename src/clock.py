@@ -1,6 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from src import bot
+from . import bot
 
 sched = BlockingScheduler()
 
