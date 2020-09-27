@@ -5,7 +5,7 @@ from src import bot
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=2)
+@sched.scheduled_job("interval", minutes=2)
 def timed_job():
     bot.scrape_el_economista()
 
