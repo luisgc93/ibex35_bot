@@ -1,8 +1,10 @@
 import os
 import random
+from urllib.request import urlopen
 
 import nltk
 import requests
+from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from twitter import OAuth, Twitter
 
@@ -42,14 +44,16 @@ def scrape_el_economista():
     links = tree.xpath('//div[@class="firstContent-centerColumn '
                        'col-xl-5 col-lg-5 col-md-12 col-12 order-1 order-md-1 '
                        'order-lg-2"]//a/@href')
-    link = parse_links(links)
-    response = requests.get(link, headers=HEADERS)
-    blog_tree = fromstring(response.content)
-    para = blog_tree.xpath('//p/text()')[0]
-    sub_header = blog_tree.xpath('//h2/text()')[0]
+    url = parse_links(links)
+    page = urlopen(url)
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    para = soup.find_all("p")[2].get_text()
     tokenized_para = tokenizer.tokenize(para)
-    text = sub_header + '. ' + random.choice(tokenized_para)
-    status = f"{text[:200]} {link}"[:TW_CHAR_LIMIT]
+    text = random.choice(tokenized_para)
+    if len(url) + len(text) > TW_CHAR_LIMIT:
+        text = text[:TW_CHAR_LIMIT + 5 - len(url)] + "(...)"
+    status = f"{text} {url}"
     t.statuses.update(status=status)
 
 
