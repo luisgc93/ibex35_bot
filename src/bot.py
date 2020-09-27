@@ -46,8 +46,7 @@ def scrape_el_economista():
     para = soup.find_all("p")[2].get_text()
     tokenized_para = tokenizer.tokenize(para)
     text = random.choice(tokenized_para)
-    if len(url) + len(text) > const.TW_CHAR_LIMIT:
-        text = text[: const.TW_CHAR_LIMIT + 5 - len(url)] + "(...)"
+
     status = f"{text} {url}"
     t.statuses.update(status=status)
 
