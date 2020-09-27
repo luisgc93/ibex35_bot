@@ -6,3 +6,4 @@ twitter
 isort
 flake8
 flask
+beautifulsoup4
