@@ -4,7 +4,7 @@ WORKDIR /code
 
 COPY requirements.txt /code/
 
-RUN pip install -r /tmp/requirements.txt
+RUN pip install -r /code/requirements.txt
 
 COPY . /code/
 
