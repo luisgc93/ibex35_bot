@@ -5,6 +5,7 @@ from urllib.request import urlopen
 import nltk
 import requests
 from bs4 import BeautifulSoup
+from . import const
 from lxml.html import fromstring
 from twitter import OAuth, Twitter
 
@@ -20,14 +21,6 @@ oauth = OAuth(
 )
 t = Twitter(auth=oauth)
 
-TW_CHAR_LIMIT = 280
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4)"
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4)"
-    "Safari/537.36"
-}
-
 
 def parse_links(links):
     link = set(filter(lambda x: "autor" not in x, links)).pop()
@@ -38,7 +31,7 @@ def parse_links(links):
 
 def scrape_el_economista():
     response = requests.get(
-        "https://www.eleconomista.es/mercados-cotizaciones/", headers=HEADERS
+        "https://www.eleconomista.es/mercados-cotizaciones/", headers=const.HEADERS
     )
     tree = fromstring(response.content)
     links = tree.xpath(
@@ -53,8 +46,8 @@ def scrape_el_economista():
     para = soup.find_all("p")[2].get_text()
     tokenized_para = tokenizer.tokenize(para)
     text = random.choice(tokenized_para)
-    if len(url) + len(text) > TW_CHAR_LIMIT:
-        text = text[: TW_CHAR_LIMIT + 5 - len(url)] + "(...)"
+    if len(url) + len(text) > const.TW_CHAR_LIMIT:
+        text = text[: const.TW_CHAR_LIMIT + 5 - len(url)] + "(...)"
     status = f"{text} {url}"
     t.statuses.update(status=status)
 
