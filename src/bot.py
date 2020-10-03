@@ -56,8 +56,8 @@ def scrape_bolsamania():
     tree = fromstring(response.content)
     links = tree.xpath("//article/header/h2/a/@href")
     url = links[0]
-    request = requests.get(url)
-    soup = BeautifulSoup(request.content, "html.parser")
+    url_content = requests.get(url).content
+    soup = BeautifulSoup(url_content, "html.parser")
     para = soup.find_all("p")[0].get_text()
     status = generate_status(para, url)
     t.statuses.update(status=status)
