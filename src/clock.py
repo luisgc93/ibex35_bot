@@ -15,4 +15,9 @@ def scheduled_job():
     bot.scrape_website(home_url, xpath)
 
 
-sched.start()
+def main():
+    sched.start()
+
+
+if __name__ == "__main__":
+    main()
