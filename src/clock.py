@@ -1,6 +1,7 @@
 import random
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+
 from . import bot
 
 sched = BlockingScheduler()

@@ -5,9 +5,10 @@ from urllib.request import urlopen
 import nltk
 import requests
 from bs4 import BeautifulSoup
-from . import const
 from lxml.html import fromstring
 from twitter import OAuth, Twitter
+
+from . import const
 
 nltk.download("punkt")
 
@@ -53,7 +54,7 @@ def scrape_bolsamania():
         "https://www.bolsamania.com/indice/IBEX-35/noticias", headers=const.HEADERS
     )
     tree = fromstring(response.content)
-    links = tree.xpath('//article/header/h2/a/@href')
+    links = tree.xpath("//article/header/h2/a/@href")
     url = links[0]
     request = requests.get(url)
     soup = BeautifulSoup(request.content, "html.parser")
