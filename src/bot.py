@@ -30,7 +30,9 @@ def get_article_url(home_url, xpath):
 def extract_paragraph(article_url):
     content = requests.get(article_url).content
     soup = BeautifulSoup(content, "html.parser")
-    para = soup.find_all("p")[3].get_text()
+    string_list = [x.get_text() for x in soup.find_all("p")]
+    filtered_list = [x for x in string_list if len(x)>= 30]
+    para = random.choice(filtered_list)
     return para
 
 
