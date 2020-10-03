@@ -42,7 +42,7 @@ def scrape_el_economista():
     url = parse_links(links)
     url_content = requests.get(url).content
     soup = BeautifulSoup(url_content, "html.parser")
-    para = soup.find_all("p")[2].get_text()
+    para = soup.find_all("p")[3].get_text()
     status = generate_status(para, url)
     t.statuses.update(status=status)
 
@@ -56,7 +56,7 @@ def scrape_bolsamania():
     url = links[0]
     url_content = requests.get(url).content
     soup = BeautifulSoup(url_content, "html.parser")
-    para = soup.find_all("p")[0].get_text()
+    para = soup.find_all("p")[3].get_text()
     status = generate_status(para, url)
     t.statuses.update(status=status)
 
