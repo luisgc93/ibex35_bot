@@ -1,6 +1,5 @@
 import os
 import random
-from urllib.request import urlopen
 
 import nltk
 import requests
@@ -41,9 +40,8 @@ def scrape_el_economista():
         'order-lg-2"]//a/@href'
     )
     url = parse_links(links)
-    page = urlopen(url)
-    html = page.read().decode("utf-8")
-    soup = BeautifulSoup(html, "html.parser")
+    url_content = requests.get(url).content
+    soup = BeautifulSoup(url_content, "html.parser")
     para = soup.find_all("p")[2].get_text()
     status = generate_status(para, url)
     t.statuses.update(status=status)
