@@ -53,4 +53,3 @@ def scrape_el_economista():
     t.statuses.update(status=status)
 
 
-scrape_el_economista()
