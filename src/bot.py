@@ -22,11 +22,11 @@ oauth = OAuth(
 t = Twitter(auth=oauth)
 
 
-def parse_links(links):
-    link = set(filter(lambda x: "autor" not in x, links)).pop()
-    if link.startswith("//"):
-        link = "https://" + link[2:]
-    return link
+def extract_url(urls):
+    url = set(filter(lambda x: "autor" not in x, urls)).pop()
+    if url.startswith("//"):
+        url = "https://" + url[2:]
+    return url
 
 
 def scrape_el_economista():
@@ -34,12 +34,12 @@ def scrape_el_economista():
         "https://www.eleconomista.es/mercados-cotizaciones/", headers=const.HEADERS
     )
     tree = fromstring(response.content)
-    links = tree.xpath(
+    urls = tree.xpath(
         '//div[@class="firstContent-centerColumn '
         "col-xl-5 col-lg-5 col-md-12 col-12 order-1 order-md-1 "
         'order-lg-2"]//a/@href'
     )
-    url = parse_links(links)
+    url = extract_url(urls)
     url_content = requests.get(url).content
     soup = BeautifulSoup(url_content, "html.parser")
     para = soup.find_all("p")[3].get_text()
