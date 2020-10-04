@@ -31,7 +31,10 @@ def extract_paragraph(article_url):
     content = requests.get(article_url).content
     soup = BeautifulSoup(content, "html.parser")
     string_list = [x.get_text() for x in soup.find_all("p")]
-    filtered_list = [x for x in string_list if len(x)>= 30]
+    filtered_list = [x for x in string_list if len(x) >= 30]
+    if "www.abc.es" in article_url:
+        # this site adds pop-ups under <p> tags at the end of the page
+        filtered_list = filtered_list[:len(filtered_list)-5]
     para = random.choice(filtered_list)
     return para
 
