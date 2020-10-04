@@ -16,5 +16,9 @@ SITES = [
     {
         "home_url": "https://www.bolsamania.com/indice/IBEX-35/noticias",
         "xpath": "//article/header/h2/a/@href"
+    },
+    {
+        "home_url": "https://www.abc.es/economia/bolsa/ibex-35/",
+        "xpath": "//article/span/h1/a/@href"
     }
 ]
