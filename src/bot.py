@@ -21,7 +21,7 @@ def get_article_url(home_url, xpath):
     response = requests.get(home_url, headers=const.HEADERS)
     tree = fromstring(response.content)
     urls = tree.xpath(xpath)
-    article_url = set(filter(lambda x: "autor" not in x, urls)).pop()
+    article_url = random.choice([x for x in urls if "autor" not in x])
     if article_url.startswith("//"):
         article_url = "https://" + article_url[2:]
     return article_url
