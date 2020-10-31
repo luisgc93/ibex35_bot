@@ -1,11 +1,11 @@
 import os
 import random
+import tweepy
 
 import nltk
 import requests
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
-from twitter import OAuth, Twitter
 
 from . import const
 
@@ -34,7 +34,7 @@ def extract_paragraph(article_url):
     filtered_list = [x for x in string_list if len(x) >= 60]
     if "www.abc.es" in article_url:
         # this site adds pop-ups under <p> tags at the end of the page
-        filtered_list = filtered_list[:len(filtered_list)-5]
+        filtered_list = filtered_list[: len(filtered_list) - 5]
     para = random.choice(filtered_list)
     return para
 
@@ -52,11 +52,12 @@ def generate_status(para, url):
 
 
 def publish_tweet(status):
-    oauth = OAuth(
-        os.environ.get("ACCESS_TOKEN"),
-        os.environ.get("ACCESS_TOKEN_SECRET"),
-        os.environ.get("CONSUMER_KEY"),
-        os.environ.get("CONSUMER_SECRET"),
+    auth = tweepy.OAuthHandler(
+        os.environ.get("CONSUMER_KEY"), os.environ.get("CONSUMER_SECRET")
     )
-    t = Twitter(auth=oauth)
-    t.statuses.update(status=status)
+    auth.set_access_token(
+        os.environ.get("ACCESS_TOKEN"), os.environ.get("CONSUMER_SECRET")
+    )
+    api = tweepy.API(auth)
+    api.update_status("tweepy + oauth!")
+    api.update_status(status=status)
