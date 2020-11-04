@@ -7,7 +7,7 @@ from . import bot, const
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=2)
+@sched.scheduled_job('interval', minutes=3)
 def timed_job():
     site = random.choice(const.SITES)
     home_url = site.get("home_url")
