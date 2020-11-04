@@ -59,5 +59,4 @@ def publish_tweet(status):
         os.environ.get("ACCESS_TOKEN"), os.environ.get("CONSUMER_SECRET")
     )
     api = tweepy.API(auth)
-    api.update_status("tweepy + oauth!")
     api.update_status(status=status)
