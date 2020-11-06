@@ -1,4 +1,3 @@
-import logging
 import os
 import random
 import tweepy
@@ -9,8 +8,6 @@ from bs4 import BeautifulSoup
 from lxml.html import fromstring
 
 from . import const
-
-logger = logging.getLogger(__name__)
 
 
 def scrape_website(home_url, xpath):
@@ -55,9 +52,6 @@ def generate_status(para, url):
 
 
 def publish_tweet(status):
-    logger.info(os.environ.get("CONSUMER_KEY"))
-    logger.info(os.environ.get("CONSUMER_SECRET"))
-    logger.info(os.environ.get("ACCESS_TOKEN"))
     auth = tweepy.OAuthHandler(
         os.environ.get("CONSUMER_KEY"), os.environ.get("CONSUMER_SECRET")
     )
