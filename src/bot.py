@@ -67,7 +67,7 @@ def reply_to_mentions():
     for mention in mentions:
         tweet = mention.text
         if "$" in tweet:
-            user = mentions.user.screen_name
+            user = mention.user.screen_name
             stock_name = parse_stock_name(tweet)
             stock_price = get_stock_price(stock_name)
             if stock_price:
