@@ -110,7 +110,7 @@ def get_stock_price(stock_name):
         data, meta_data = ts.get_intraday(stock_name)
     except ValueError as e:
         capture_exception(e)
-        if "Our standard API call frequency is 5 calls per minute and 500 calls per day" in str(e):
+        if const.API_LIMIT_EXCEEDED_MESSAGE in str(e):
             return "API rate exceeded"
         return
 

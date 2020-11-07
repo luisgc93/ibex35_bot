@@ -22,3 +22,7 @@ SITES = [
         "xpath": "//article/span/h1/a/@href"
     }
 ]
+
+API_LIMIT_EXCEEDED_MESSAGE = (
+    "Our standard API call frequency is 5 calls per minute and 500 calls per day."
+)
