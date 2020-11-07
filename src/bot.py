@@ -5,6 +5,7 @@ import nltk
 import requests
 import logging
 
+from alpha_vantage.timeseries import TimeSeries
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from os import environ
@@ -87,8 +88,6 @@ def parse_stock_name(string):
 
 
 def get_stock_price(stock_name):
-    from alpha_vantage.timeseries import TimeSeries
-
     ts = TimeSeries(key=environ["ALPHA_VANTAGE_API_KEY"])
     try:
         data, meta_data = ts.get_intraday(stock_name)
