@@ -67,7 +67,7 @@ def reply_to_mentions():
     for mention in mentions:
         try:
             if "$" in mention.text:
-                stock_name = parse_stock_name(mention)
+                stock_name = parse_stock_name(mention.text)
                 stock_price = get_stock_price(stock_name)
                 if stock_price:
                     status = f"Las acciones de ${stock_name} cotizan a {stock_price}"
