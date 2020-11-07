@@ -9,9 +9,15 @@ from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from os import environ
 
+from tweepy import TweepError
+
 from . import const
 
 logger = logging.getLogger(__name__)
+
+auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
+auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
+api = tweepy.API(auth)
 
 
 def scrape_website(home_url, xpath):
@@ -56,7 +62,17 @@ def generate_status(para, url):
 
 
 def publish_tweet(status):
-    auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
-    auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
-    api = tweepy.API(auth)
     api.update_status(status=status)
+
+
+def reply_to_mentions():
+    mentions = api.mentions_timeline(since_id=1)
+    for mention in mentions:
+        try:
+            api.update_status(
+                status="How can I help you?",
+                in_reply_to_status_id=mention.id
+            )
+        except TweepError as e:
+            logger.info(e.reason)
+            continue
