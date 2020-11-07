@@ -57,6 +57,7 @@ def generate_status(para, url):
     if shortened_url_length + len(text) > const.TW_CHAR_LIMIT:
         text = text[: const.TW_CHAR_LIMIT + 5 - shortened_url_length] + "(...)"
     status = f"{text} {url}"
+    logger.info('Publishing tweet')
     api.update_status(status=status)
 
 
