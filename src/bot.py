@@ -8,7 +8,6 @@ import logging
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from os import environ
-
 from sentry_sdk import capture_exception
 from tweepy import TweepError
 
