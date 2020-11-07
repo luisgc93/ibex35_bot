@@ -28,7 +28,7 @@ API_LIMIT_EXCEEDED_MESSAGE = (
 )
 
 API_LIMIT_EXCEEDED_RESPONSE = (
-    "Se ha excedido el límite de búsquedas (5/minuto). Vuelve a probar más tarde."
+    "Se ha excedido el límite de búsquedas (5/minuto y 500/día). Vuelve a probar más tarde."
 )
 
 STOCK_NOT_FOUND_RESPONSE = (
