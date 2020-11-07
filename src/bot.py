@@ -68,5 +68,5 @@ def reply_to_mentions():
                 status="How can I help you?", in_reply_to_status_id=mention.id
             )
         except TweepError as e:
-            logger.info(e.reason)
+            logger.exception(e.reason)
             continue
