@@ -50,7 +50,7 @@ def extract_paragraph(article_url):
 
 def generate_status(para, url):
     nltk.download("punkt")
-    tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
+    tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
     tokenized_para = tokenizer.tokenize(para)
     text = random.choice(tokenized_para)
     shortened_url_length = 30
