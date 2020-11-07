@@ -1,4 +1,3 @@
-import os
 import random
 import tweepy
 
@@ -6,6 +5,7 @@ import nltk
 import requests
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
+from os import environ
 
 from . import const
 
@@ -52,11 +52,7 @@ def generate_status(para, url):
 
 
 def publish_tweet(status):
-    auth = tweepy.OAuthHandler(
-        os.environ.get("CONSUMER_KEY"), os.environ.get("CONSUMER_SECRET")
-    )
-    auth.set_access_token(
-        os.environ.get("ACCESS_TOKEN"), os.environ.get("ACCESS_TOKEN_SECRET")
-    )
+    auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
+    auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
     api = tweepy.API(auth)
     api.update_status(status=status)
