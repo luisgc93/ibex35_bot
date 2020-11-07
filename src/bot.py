@@ -66,7 +66,7 @@ def reply_to_mentions():
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
         try:
-            if "$" in mention:
+            if "$" in mention.text:
                 stock_name = parse_stock_name(mention)
                 stock_price = get_stock_price(stock_name)
                 if stock_price:
