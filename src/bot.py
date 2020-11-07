@@ -74,7 +74,7 @@ def reply_to_mentions():
                 status = f"@{user} Las acciones de ${stock_name} cotizan a {stock_price}."
             else:
                 status = (
-                    f"@{user} No he podido encontrar el precio de ${stock_name}. "
+                    f"@{user} No he podido encontrar el precio de ${stock_name}."
                     "Vuelve a intentarlo más tarde."
                 )
             try:
