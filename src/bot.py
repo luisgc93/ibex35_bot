@@ -68,7 +68,7 @@ def reply_to_mentions():
             if '$' in mention:
                 stock_name = parse_stock_name(mention)
                 stock_price = get_stock_price(stock_name)
-                status = f"The price of ${stock_name} is {stock_price}"
+                status = f"Las acciones de ${stock_name} cotizan a {stock_price}"
             api.update_status(
                 status=status, in_reply_to_status_id=mention.id
             )
