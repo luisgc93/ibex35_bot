@@ -94,6 +94,8 @@ def get_stock_price(stock_name):
         data, meta_data = ts.get_intraday(stock_name)
     except ValueError as e:
         capture_exception(e)
+        return
+
     key = list(data.keys())[0]
     return f'${data[key]["1. open"]}'
 
