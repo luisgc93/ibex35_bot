@@ -32,7 +32,7 @@ API_LIMIT_EXCEEDED_RESPONSE = (
 )
 
 STOCK_NOT_FOUND_RESPONSE = (
-    "Solo puedo buscar acciones que cotizan en el NASDAQ,"
+    "Disculpa, solo puedo buscar acciones que cotizan en el NASDAQ, "
     "lo que excluye ciertas empresas del IBEX 😓: "
     "https://www.nasdaq.com/market-activity/stocks/screener."
 )
