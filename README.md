@@ -6,4 +6,4 @@ A twitter bot that posts financial news articles about [Spain's stock market ind
 ![Alt text](/happy_path_response.png)
 
 ## Implementation 🛠️
-The bot uses [RomelTorres' python wrapper](https://github.com/RomelTorres/alpha_vantage) for [Alpha Vantage's API](https://www.alphavantage.co/documentation/). It's deployed on Heroku with Docker 🐳 and uses two separate [clock processes](https://devcenter.heroku.com/articles/clock-processes-python) for posting articles and listening to twitter mentions.
+The bot uses [RomelTorres' python wrapper](https://github.com/RomelTorres/alpha_vantage) for the [Alpha Vantage API](https://www.alphavantage.co/documentation/). It's deployed on Heroku with Docker 🐳 and uses two separate [clock processes](https://devcenter.heroku.com/articles/clock-processes-python) for posting articles and listening to twitter mentions.
