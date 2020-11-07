@@ -108,7 +108,9 @@ def get_stock_price(stock_name):
         return
 
     key = list(data.keys())[0]
-    return f'${data[key]["1. open"]}'
+    full_price = data[key]["1. open"]
+
+    return f'${full_price[:-2]}'
 
 
 def main():
