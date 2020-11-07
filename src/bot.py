@@ -112,15 +112,3 @@ def get_stock_price(stock_name):
     full_price = data[key]["1. open"]
 
     return f"${full_price[:-2]}"
-
-
-def main():
-    site = random.choice(const.SITES)
-    home_url = site.get("home_url")
-    xpath = site.get("xpath")
-    scrape_website(home_url, xpath)
-    reply_to_mentions()
-
-
-if __name__ == "__main__":
-    main()
