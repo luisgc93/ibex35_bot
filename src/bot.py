@@ -80,10 +80,14 @@ def reply_to_mentions():
                     "https://tinyurl.com/w8oqunv."
                 )
             elif stock_price == "API rate exceeded":
-                status = f"@{user} Se ha excedido el límite de búsquedas (5/minuto). " \
-                         "Vuelve a probar más tarde."
+                status = (
+                    f"@{user} Se ha excedido el límite de búsquedas (5/minuto). "
+                    "Vuelve a probar más tarde."
+                )
             else:
-                status = f"@{user} Las acciones de ${stock_name} cotizan a {stock_price}."
+                status = (
+                    f"@{user} Las acciones de ${stock_name} cotizan a {stock_price}."
+                )
             try:
                 api.update_status(status=status, in_reply_to_status_id=mention.id)
             except TweepError as e:
@@ -117,7 +121,7 @@ def get_stock_price(stock_name):
     key = list(data.keys())[0]
     full_price = data[key]["1. open"]
 
-    return f'${full_price[:-2]}'
+    return f"${full_price[:-2]}"
 
 
 def main():

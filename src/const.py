@@ -9,18 +9,18 @@ HEADERS = {
 SITES = [
     {
         "home_url": "https://www.eleconomista.es/mercados-cotizaciones/",
-        "xpath":         '//div[@class="firstContent-centerColumn '
-                         "col-xl-5 col-lg-5 col-md-12 col-12 order-1 order-md-1 "
-                         'order-lg-2"]//a/@href',
-     },
+        "xpath": '//div[@class="firstContent-centerColumn '
+        "col-xl-5 col-lg-5 col-md-12 col-12 order-1 order-md-1 "
+        'order-lg-2"]//a/@href',
+    },
     {
         "home_url": "https://www.bolsamania.com/indice/IBEX-35/noticias",
-        "xpath": "//article/header/h2/a/@href"
+        "xpath": "//article/header/h2/a/@href",
     },
     {
         "home_url": "https://www.abc.es/economia/bolsa/ibex-35/",
-        "xpath": "//article/span/h1/a/@href"
-    }
+        "xpath": "//article/span/h1/a/@href",
+    },
 ]
 
 API_LIMIT_EXCEEDED_MESSAGE = (
