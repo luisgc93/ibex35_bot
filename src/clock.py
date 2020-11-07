@@ -7,7 +7,7 @@ from . import bot, const
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=55)
+@sched.scheduled_job('interval', minutes=2)
 def timed_job():
     bot.reply_to_mentions()
 
