@@ -73,3 +73,15 @@ def reply_to_mentions():
         except TweepError as e:
             capture_exception(e)
             continue
+
+
+def main():
+    site = random.choice(const.SITES)
+    home_url = site.get("home_url")
+    xpath = site.get("xpath")
+    scrape_website(home_url, xpath)
+    reply_to_mentions()
+
+
+if __name__ == "__main__":
+    main()
