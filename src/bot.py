@@ -65,9 +65,10 @@ def generate_status(para, url):
 def reply_to_mentions():
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
+        tweet = mention.text
         try:
-            if "$" in mention.text:
-                stock_name = parse_stock_name(mention.text)
+            if "$" in tweet:
+                stock_name = parse_stock_name(tweet)
                 stock_price = get_stock_price(stock_name)
                 if stock_price:
                     status = f"Las acciones de ${stock_name} cotizan a {stock_price}"
