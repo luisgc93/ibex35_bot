@@ -60,7 +60,6 @@ def generate_status(para, url):
     status = f"{text} {url}"
     logger.info("Publishing tweet")
     api.update_status(status=status)
-    reply_to_mentions()
 
 
 def reply_to_mentions():
