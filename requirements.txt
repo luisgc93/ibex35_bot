@@ -6,3 +6,4 @@ tweepy
 isort
 beautifulsoup4
 black
+sentry_sdk
