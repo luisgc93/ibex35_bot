@@ -1,4 +1,5 @@
 APScheduler
+alpha_vantage
 lxml
 nltk
 requests
