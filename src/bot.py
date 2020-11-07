@@ -75,7 +75,7 @@ def reply_to_mentions():
             else:
                 status = (
                     f"@{user} No he podido encontrar el precio de ${stock_name}."
-                    "Vuelve a intentarlo más tarde."
+                    " Vuelve a intentarlo más tarde."
                 )
             try:
                 api.update_status(status=status, in_reply_to_status_id=mention.id)
