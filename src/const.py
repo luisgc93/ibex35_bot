@@ -26,3 +26,13 @@ SITES = [
 API_LIMIT_EXCEEDED_MESSAGE = (
     "Our standard API call frequency is 5 calls per minute and 500 calls per day."
 )
+
+API_LIMIT_EXCEEDED_RESPONSE = (
+    "Se ha excedido el límite de búsquedas (5/minuto). Vuelve a probar más tarde."
+)
+
+STOCK_NOT_FOUND_RESPONSE = (
+    "Solo puedo buscar acciones que cotizan en el NASDAQ,"
+    "lo que excluye ciertas empresas del IBEX 😓: "
+    "https://www.nasdaq.com/market-activity/stocks/screener."
+)
