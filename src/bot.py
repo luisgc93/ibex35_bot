@@ -65,12 +65,33 @@ def reply_to_mentions():
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
         try:
+            if '$' in mention:
+                stock_name = parse_stock_name(mention)
+                stock_price = get_stock_price(stock_name)
+                status = f"The price of ${stock_name} is {stock_price}"
             api.update_status(
-                status="How can I help you?", in_reply_to_status_id=mention.id
+                status=status, in_reply_to_status_id=mention.id
             )
         except TweepError as e:
             capture_exception(e)
             continue
+
+
+def parse_stock_name(string):
+    name = string.split("$")[1].split(' ')[0]
+    return ''.join([x for x in name if x.isalpha()])
+
+
+def get_stock_price(stock_name):
+    from alpha_vantage.timeseries import TimeSeries
+    ts = TimeSeries(key=environ['ALPHA_VANTAGE_API_KEY'])
+    try:
+        data, meta_data = ts.get_intraday(stock_name)
+    except ValueError as e:
+        capture_exception(e)
+        return f"No he podido encontrar el precio de {stock_name}. Vuelve a intentarlo más tarde."
+    key = list(data.keys())[0]
+    return f'${data[key]["1. open"]}'
 
 
 def main():
