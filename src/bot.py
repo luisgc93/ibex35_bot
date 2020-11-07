@@ -66,21 +66,21 @@ def reply_to_mentions():
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
         tweet = mention.text
-        try:
-            if "$" in tweet:
-                stock_name = parse_stock_name(tweet)
-                stock_price = get_stock_price(stock_name)
-                if stock_price:
-                    status = f"Las acciones de ${stock_name} cotizan a {stock_price}"
-                else:
-                    status = (
-                        f"No he podido encontrar el precio de {stock_name}. "
-                        "Vuelve a intentarlo más tarde."
-                    )
+        if "$" in tweet:
+            stock_name = parse_stock_name(tweet)
+            stock_price = get_stock_price(stock_name)
+            if stock_price:
+                status = f"Las acciones de ${stock_name} cotizan a {stock_price}"
+            else:
+                status = (
+                    f"No he podido encontrar el precio de {stock_name}. "
+                    "Vuelve a intentarlo más tarde."
+                )
+            try:
                 api.update_status(status=status, in_reply_to_status_id=mention.id)
-        except TweepError as e:
-            capture_exception(e)
-            continue
+            except TweepError as e:
+                capture_exception(e)
+                continue
 
 
 def parse_stock_name(string):
