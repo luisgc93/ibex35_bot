@@ -67,13 +67,14 @@ def reply_to_mentions():
     for mention in mentions:
         tweet = mention.text
         if "$" in tweet:
+            user = mentions.user.screen_name
             stock_name = parse_stock_name(tweet)
             stock_price = get_stock_price(stock_name)
             if stock_price:
-                status = f"Las acciones de ${stock_name} cotizan a {stock_price}"
+                status = f"@{user} Las acciones de ${stock_name} cotizan a {stock_price}"
             else:
                 status = (
-                    f"No he podido encontrar el precio de ${stock_name}. "
+                    f"@{user} No he podido encontrar el precio de ${stock_name}. "
                     "Vuelve a intentarlo más tarde."
                 )
             try:
