@@ -23,8 +23,7 @@ api = tweepy.API(auth)
 def scrape_website(home_url, xpath):
     article = get_article_url(home_url, xpath)
     para = extract_paragraph(article)
-    status = generate_status(para, article)
-    publish_tweet(status)
+    generate_status(para, article)
 
 
 def get_article_url(home_url, xpath):
@@ -58,10 +57,6 @@ def generate_status(para, url):
     if shortened_url_length + len(text) > const.TW_CHAR_LIMIT:
         text = text[: const.TW_CHAR_LIMIT + 5 - shortened_url_length] + "(...)"
     status = f"{text} {url}"
-    return status
-
-
-def publish_tweet(status):
     api.update_status(status=status)
 
 
