@@ -73,13 +73,13 @@ def reply_to_mentions():
             stock_name = parse_stock_name(tweet)
             stock_price = get_stock_price(stock_name)
             if not stock_price:
-                status = f"@{user} {const.STOCK_NOT_FOUND_RESPONSE}"
+                response = const.STOCK_NOT_FOUND_RESPONSE
             elif stock_price == "API rate exceeded":
-                status = f"@{user} {const.API_LIMIT_EXCEEDED_RESPONSE}"
+                response = const.API_LIMIT_EXCEEDED_RESPONSE
             else:
-                status = f"@{user} Las acciones de ${stock_name} cotizan a {stock_price}."
+                response = f"Las acciones de ${stock_name} cotizan a {stock_price}."
             try:
-                api.update_status(status=status, in_reply_to_status_id=mention.id)
+                api.update_status(status=f"@{user} {response}", in_reply_to_status_id=mention.id)
             except TweepError as e:
                 capture_exception(e)
                 continue
