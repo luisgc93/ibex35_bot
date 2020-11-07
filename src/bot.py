@@ -3,11 +3,15 @@ import tweepy
 
 import nltk
 import requests
+import logging
+
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from os import environ
 
 from . import const
+
+logger = logging.getLogger(__name__)
 
 
 def scrape_website(home_url, xpath):
