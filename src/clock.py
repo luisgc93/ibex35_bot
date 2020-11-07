@@ -13,6 +13,7 @@ def scheduled_job():
     home_url = site.get("home_url")
     xpath = site.get("xpath")
     bot.scrape_website(home_url, xpath)
+    bot.reply_to_mentions()
 
 
 def main():
