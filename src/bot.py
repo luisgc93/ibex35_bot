@@ -52,7 +52,7 @@ def extract_paragraph(article_url):
 def generate_status(para, url):
     nltk.download("punkt")
     tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
-    tokenized_para = tokenizer.tokenize(para)
+    tokenized_para = [x for x in tokenizer.tokenize(para) if len(x) >= 30]
     text = random.choice(tokenized_para)
     shortened_url_length = 30
     if shortened_url_length + len(text) > const.TW_CHAR_LIMIT:
