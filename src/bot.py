@@ -65,6 +65,8 @@ def generate_status(para, url):
 def reply_to_mentions():
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
+        if mention_has_been_replied(mention.id):
+            continue
         tweet = mention.text
         if "$" in tweet:
             user = mention.user.screen_name
@@ -82,6 +84,14 @@ def reply_to_mentions():
             except TweepError as e:
                 capture_exception(e)
                 continue
+
+
+def mention_has_been_replied(mention_id):
+    recent_bot_tweets = api.user_timeline(count=10)
+    for tweet in recent_bot_tweets:
+        if tweet.in_reply_to_status_id == mention_id:
+            return True
+    return False
 
 
 def parse_stock_name(string):
