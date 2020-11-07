@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from os import environ
 
+from sentry_sdk import capture_exception
 from tweepy import TweepError
 
 from . import const
@@ -57,8 +58,9 @@ def generate_status(para, url):
     if shortened_url_length + len(text) > const.TW_CHAR_LIMIT:
         text = text[: const.TW_CHAR_LIMIT + 5 - shortened_url_length] + "(...)"
     status = f"{text} {url}"
-    logger.info('Publishing tweet')
+    logger.info("Publishing tweet")
     api.update_status(status=status)
+    reply_to_mentions()
 
 
 def reply_to_mentions():
@@ -69,5 +71,5 @@ def reply_to_mentions():
                 status="How can I help you?", in_reply_to_status_id=mention.id
             )
         except TweepError as e:
-            logger.exception(e.reason)
+            capture_exception(e)
             continue
