@@ -54,9 +54,10 @@ def generate_status(para, url):
     tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
     tokenized_para = [x for x in tokenizer.tokenize(para) if len(x) >= 30]
     text = random.choice(tokenized_para)
+    shortened_url_length = 30
+    if shortened_url_length + len(text) > const.TW_CHAR_LIMIT:
+        text = text[: const.TW_CHAR_LIMIT + 5 - shortened_url_length] + "(...)"
     status = f"{text} {url}"
-    if len(status) > const.TW_CHAR_LIMIT:
-        status = f"{text} {url}"[:const.TW_CHAR_LIMIT] + "(...)"
     logger.info("Publishing tweet")
     api.update_status(status=status)
 
