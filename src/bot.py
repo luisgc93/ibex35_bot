@@ -52,8 +52,9 @@ def extract_paragraph(article_url):
 def generate_status(para, url):
     nltk.download("punkt")
     tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
-    tokenized_para = [x for x in tokenizer.tokenize(para) if
-                      len(x) >= const.MINIMUM_PARAGRAPH_LENGTH]
+    tokenized_para = [
+        x for x in tokenizer.tokenize(para) if len(x) >= const.MINIMUM_PARAGRAPH_LENGTH
+    ]
     text = random.choice(tokenized_para)
     if const.SHORTENED_URL_LENGTH + len(text) > const.TW_CHAR_LIMIT:
         text = shorten_text(text)
@@ -84,7 +85,9 @@ def reply_to_mentions():
             else:
                 response = f"Las acciones de ${stock_name} cotizan a {stock_price}."
             try:
-                api.update_status(status=f"@{user} {response}", in_reply_to_status_id=mention.id)
+                api.update_status(
+                    status=f"@{user} {response}", in_reply_to_status_id=mention.id
+                )
             except TweepError as e:
                 capture_exception(e)
                 continue
