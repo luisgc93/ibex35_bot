@@ -52,14 +52,19 @@ def extract_paragraph(article_url):
 def generate_status(para, url):
     nltk.download("punkt")
     tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
-    tokenized_para = [x for x in tokenizer.tokenize(para) if len(x) >= 30]
+    tokenized_para = [x for x in tokenizer.tokenize(para) if
+                      len(x) >= const.MINIMUM_PARAGRAPH_LENGTH]
     text = random.choice(tokenized_para)
-    shortened_url_length = 30
-    if shortened_url_length + len(text) > const.TW_CHAR_LIMIT:
-        text = text[: const.TW_CHAR_LIMIT + 5 - shortened_url_length] + "(...)"
+    if const.SHORTENED_URL_LENGTH + len(text) > const.TW_CHAR_LIMIT:
+        text = shorten_text(text)
+
     status = f"{text} {url}"
     logger.info("Publishing tweet")
     api.update_status(status=status)
+
+
+def shorten_text(text):
+    return text[: const.MAX_TRUNCATED_CHARACTER_COUNT] + const.TRUNCATED_TEXT_STRING
 
 
 def reply_to_mentions():
