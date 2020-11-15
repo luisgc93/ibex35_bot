@@ -17,7 +17,6 @@ sched = BlockingScheduler()
 @sched.scheduled_job("interval", minutes=2)
 def timed_job():
     bot.reply_to_mentions()
-    division_by_zero = 1 / 0
 
 
 @sched.scheduled_job("cron", day_of_week="mon-sat", hour=10)
