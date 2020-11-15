@@ -10,7 +10,6 @@ from alpha_vantage.timeseries import TimeSeries
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from sentry_sdk import capture_exception
-from tweepy import TweepError
 
 from . import const
 
@@ -87,13 +86,10 @@ def reply_to_mentions():
                 response = const.API_LIMIT_EXCEEDED_RESPONSE
             else:
                 response = f"Las acciones de ${stock_name} cotizan a {stock_price}."
-            try:
-                api.update_status(
-                    status=f"@{user} {response}", in_reply_to_status_id=mention.id
-                )
-            except TweepError as e:
-                capture_exception(e)
-                continue
+
+            api.update_status(
+                status=f"@{user} {response}", in_reply_to_status_id=mention.id
+            )
 
 
 def mention_has_been_replied(mention_id):
