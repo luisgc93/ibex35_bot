@@ -74,7 +74,6 @@ def shorten_text(text):
 
 
 def reply_to_mentions():
-    div = 1/0
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
         if mention_has_been_replied(mention.id):
