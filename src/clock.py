@@ -4,13 +4,6 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 from . import bot, const
 
-import sentry_sdk
-
-sentry_sdk.init(
-    "https://90374ad017384bc294c56f603b1707ad@o453678.ingest.sentry.io/5442657",
-    traces_sample_rate=1.0,
-)
-
 sched = BlockingScheduler()
 
 

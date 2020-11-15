@@ -1,18 +1,23 @@
+import logging
 import random
-import tweepy
+from os import environ
 
 import nltk
 import requests
-import logging
-
+import sentry_sdk
+import tweepy
 from alpha_vantage.timeseries import TimeSeries
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
-from os import environ
 from sentry_sdk import capture_exception
 from tweepy import TweepError
 
 from . import const
+
+sentry_sdk.init(
+    "https://90374ad017384bc294c56f603b1707ad@o453678.ingest.sentry.io/5442657",
+    traces_sample_rate=1.0,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +74,7 @@ def shorten_text(text):
 
 
 def reply_to_mentions():
+    div = 1/0
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
         if mention_has_been_replied(mention.id):
