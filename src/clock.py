@@ -4,12 +4,20 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 from . import bot, const
 
+import sentry_sdk
+
+sentry_sdk.init(
+    "https://90374ad017384bc294c56f603b1707ad@o453678.ingest.sentry.io/5442657",
+    traces_sample_rate=1.0,
+)
+
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=2)
+@sched.scheduled_job("interval", minutes=2)
 def timed_job():
     bot.reply_to_mentions()
+    division_by_zero = 1 / 0
 
 
 @sched.scheduled_job("cron", day_of_week="mon-sat", hour=10)
