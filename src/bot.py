@@ -14,10 +14,7 @@ from tweepy import TweepError
 
 from . import const
 
-sentry_sdk.init(
-    "https://90374ad017384bc294c56f603b1707ad@o453678.ingest.sentry.io/5442657",
-    traces_sample_rate=1.0,
-)
+sentry_sdk.init(environ["SENTRY_PROJECT_URL"], traces_sample_rate=1.0)
 
 logger = logging.getLogger(__name__)
 
