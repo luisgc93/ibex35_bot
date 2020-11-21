@@ -73,7 +73,8 @@ def shorten_text(text):
 
 def reply_to_mentions():
     logger.info("Test logs")
-    mentions = api.mentions_timeline(since_id=1)
+    last_mention = Mention.select().order_by(Mention.id.desc()).get()
+    mentions = api.mentions_timeline(since_id=last_mention.tweet_id)
     for mention in mentions:
         Mention(tweet_id=mention.id).save()
         if mention_has_been_replied(mention.id):
