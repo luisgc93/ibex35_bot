@@ -13,7 +13,11 @@ class Mention(Model):
         table_name = 'mentions'
 
 
-db.create_tables([Mention])
+def main():
+    db.create_tables([Mention])
+    mention1 = Mention(tweet_id=1)
+    mention1.save()
 
-mention1 = Mention(tweet_id=1)
-mention1.save()
+
+if __name__ == "__main__":
+    main()
