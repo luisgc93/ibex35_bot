@@ -1,4 +1,3 @@
-import logging
 import random
 from os import environ
 
@@ -11,13 +10,10 @@ from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from sentry_sdk import capture_exception
 
+from . import const
 from .models import Mention
 
-from . import const
-
 sentry_sdk.init(environ["SENTRY_PROJECT_URL"], traces_sample_rate=1.0)
-
-logger = logging.getLogger(__name__)
 
 auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
 auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
@@ -63,7 +59,6 @@ def generate_status(para, url):
         text = shorten_text(text)
 
     status = f"{text} {url}"
-    logger.info("Publishing tweet")
     api.update_status(status=status)
 
 
@@ -72,9 +67,8 @@ def shorten_text(text):
 
 
 def reply_to_mentions():
-    logger.info("Test logs")
-    last_mention = Mention.select().order_by(Mention.id.desc()).get()
-    mentions = api.mentions_timeline(since_id=last_mention.tweet_id)
+    last_replied_mention = Mention.select().order_by(Mention.id.desc()).get()
+    mentions = api.mentions_timeline(since_id=last_replied_mention.tweet_id)
     for mention in mentions:
         Mention(tweet_id=mention.id).save()
         tweet = mention.text

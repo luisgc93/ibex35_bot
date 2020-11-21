@@ -1,8 +1,9 @@
-from peewee import *
-from playhouse.db_url import connect
 from os import environ
 
-db = connect(environ['DATABASE_URL'])
+from peewee import BigIntegerField, Model
+from playhouse.db_url import connect
+
+db = connect(environ["DATABASE_URL"])
 
 
 class Mention(Model):
@@ -10,4 +11,4 @@ class Mention(Model):
 
     class Meta:
         database = db
-        table_name = 'mentions'
+        table_name = "mentions"
