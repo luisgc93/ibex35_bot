@@ -8,3 +8,4 @@ install:
 script:
   - isort src/*.py
   - black src/*.py
+  - flake8 src/*py
