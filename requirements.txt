@@ -4,9 +4,10 @@ lxml
 nltk
 requests
 tweepy
-isort
 beautifulsoup4
 black
+flake8
 sentry_sdk
 peewee
 psycopg2
+pytest
