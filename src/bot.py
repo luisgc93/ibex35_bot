@@ -11,6 +11,8 @@ from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from sentry_sdk import capture_exception
 
+from models import Mention
+
 from . import const
 
 sentry_sdk.init(environ["SENTRY_PROJECT_URL"], traces_sample_rate=1.0)
@@ -73,6 +75,7 @@ def reply_to_mentions():
     logger.info("Test logs")
     mentions = api.mentions_timeline(since_id=1)
     for mention in mentions:
+        Mention(tweet_id=mention.id).save()
         if mention_has_been_replied(mention.id):
             continue
         tweet = mention.text
