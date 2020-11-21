@@ -6,6 +6,8 @@ COPY requirements.txt /code/
 
 RUN pip install -r /code/requirements.txt
 
+RUN python -m src.models
+
 COPY . /code/
 
 CMD python -m src.clock
