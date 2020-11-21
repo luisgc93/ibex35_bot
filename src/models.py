@@ -5,11 +5,6 @@ from os import environ
 db = connect(environ['DATABASE_URL'])
 
 
-class BaseModel(Model):
-    class Meta:
-        database = db
-
-
 class Mention(Model):
     tweet_id = BigIntegerField()
 
