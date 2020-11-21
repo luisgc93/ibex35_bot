@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from lxml.html import fromstring
 from sentry_sdk import capture_exception
 
-from models import Mention
+from .models import Mention
 
 from . import const
 
