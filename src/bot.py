@@ -77,8 +77,6 @@ def reply_to_mentions():
     mentions = api.mentions_timeline(since_id=last_mention.tweet_id)
     for mention in mentions:
         Mention(tweet_id=mention.id).save()
-        if mention_has_been_replied(mention.id):
-            continue
         tweet = mention.text
         if "$" in tweet:
             user = mention.user.screen_name
@@ -94,14 +92,6 @@ def reply_to_mentions():
             api.update_status(
                 status=f"@{user} {response}", in_reply_to_status_id=mention.id
             )
-
-
-def mention_has_been_replied(mention_id):
-    recent_bot_tweets = api.user_timeline(count=10)
-    for tweet in recent_bot_tweets:
-        if tweet.in_reply_to_status_id == mention_id:
-            return True
-    return False
 
 
 def parse_stock_name(string):
