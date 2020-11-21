@@ -11,11 +11,3 @@ class Mention(Model):
     class Meta:
         database = db
         table_name = 'mentions'
-
-
-def main():
-    db.create_tables([Mention])
-
-
-if __name__ == "__main__":
-    main()
