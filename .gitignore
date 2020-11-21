@@ -6,6 +6,5 @@
 .venv
 venv/
 
-src/
-credentials.py
+src/credentials.py
 .env
