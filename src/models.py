@@ -6,9 +6,13 @@ from playhouse.db_url import connect
 db = connect(environ["DATABASE_URL"])
 
 
-class Mention(Model):
+class BaseModel(Model):
+    class Meta:
+        database = db
+
+
+class Mention(BaseModel):
     tweet_id = BigIntegerField()
 
     class Meta:
-        database = db
         table_name = "mentions"
