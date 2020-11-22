@@ -3,17 +3,14 @@ from os import environ
 
 import nltk
 import requests
-import sentry_sdk
 import tweepy
 from alpha_vantage.timeseries import TimeSeries
 from bs4 import BeautifulSoup
 from lxml.html import fromstring
-from sentry_sdk import capture_exception
 
 from . import const
 from .models import Mention
 
-sentry_sdk.init(environ["SENTRY_PROJECT_URL"], traces_sample_rate=1.0)
 
 auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
 auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
@@ -98,7 +95,6 @@ def get_stock_price(stock_name):
     try:
         data, meta_data = ts.get_intraday(stock_name)
     except ValueError as e:
-        capture_exception(e)
         if const.API_LIMIT_EXCEEDED_MESSAGE in str(e):
             return "API rate exceeded"
         return
