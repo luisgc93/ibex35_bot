@@ -3,7 +3,8 @@ from os import environ
 from peewee import BigIntegerField, Model
 from playhouse.db_url import connect
 
-db = connect(environ["DATABASE_URL"])
+# Use default sqlite db in tests
+db = connect(environ.get("DATABASE_URL") or 'sqlite:///default.db')
 
 
 class BaseModel(Model):
