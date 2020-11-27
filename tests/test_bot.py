@@ -26,8 +26,8 @@ class TestStocksFeature:
     def test_returns_stock_name_when_tweet_contains_stock(self, tweet, stock_name):
         assert bot.parse_stock_name(tweet) == stock_name
 
-    @pytest.mark.usefixtures("mock_get_price", "mock_not_replied_mention")
-    def test_updates_status_when_mention_has_not_been_replied(self, mock_tweepy):
+    @pytest.mark.usefixtures("mock_get_price", "mock_new_mention")
+    def test_updates_status_when_mention_is_new(self, mock_tweepy):
         bot.reply_to_mentions()
 
         mock_tweepy.assert_has_calls(
@@ -39,13 +39,21 @@ class TestStocksFeature:
             ]
         )
 
-    @pytest.mark.usefixtures("mock_get_price", "mock_not_replied_mention")
-    def test_saves_mention_when_mention_has_not_been_replied(self, mock_tweepy):
+    @pytest.mark.usefixtures("mock_get_price", "mock_new_mention")
+    def test_saves_new_mentions(self, mock_tweepy):
         assert Mention.select().count() == 0
 
         bot.reply_to_mentions()
 
         mock_tweepy.assert_has_calls([call().mentions_timeline(since_id=None)])
+        assert Mention.select().count() == 1
+
+    @pytest.mark.usefixtures("mock_replied_mention")
+    def test_does_not_save_old_mentions(self):
+        assert Mention.select().count() == 1
+
+        bot.reply_to_mentions()
+
         assert Mention.select().count() == 1
 
     @pytest.mark.usefixtures("mock_replied_mention")
@@ -58,11 +66,3 @@ class TestStocksFeature:
         bot.reply_to_mentions()
 
         assert update_status_call not in mock_tweepy.mock_calls
-
-    @pytest.mark.usefixtures("mock_replied_mention")
-    def test_does_not_save_mention_when_mention_has_been_replied(self):
-        assert Mention.select().count() == 1
-
-        bot.reply_to_mentions()
-
-        assert Mention.select().count() == 1

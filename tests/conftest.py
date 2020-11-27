@@ -42,7 +42,7 @@ def mock_tweepy(status):
 
 
 @pytest.fixture
-def mock_not_replied_mention(mock_tweepy, status):
+def mock_new_mention(mock_tweepy, status):
     mock_tweepy.return_value.mentions_timeline.return_value = [status]
     return mock_tweepy
 
