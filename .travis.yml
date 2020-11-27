@@ -8,3 +8,4 @@ install:
 script:
   - flake8 src/*.py tests/*.py --max-line-length 88
   - black src/*.py tests/*.py
+  - pytest tests/test_bot.py
