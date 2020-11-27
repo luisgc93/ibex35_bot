@@ -12,9 +12,10 @@ from . import const
 from .models import Mention
 
 
-auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
-auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
-api = tweepy.API(auth)
+def init_tweepy():
+    auth = tweepy.OAuthHandler(environ["CONSUMER_KEY"], environ["CONSUMER_SECRET"])
+    auth.set_access_token(environ["ACCESS_TOKEN"], environ["ACCESS_TOKEN_SECRET"])
+    return tweepy.API(auth)
 
 
 def scrape_website(home_url, xpath):
@@ -56,6 +57,7 @@ def generate_status(para, url):
         text = shorten_text(text)
 
     status = f"{text} {url}"
+    api = init_tweepy()
     api.update_status(status=status)
 
 
