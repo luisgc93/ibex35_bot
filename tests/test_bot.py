@@ -2,27 +2,30 @@ from unittest.mock import call
 
 import pytest
 
+from src import bot, const
 from src.models import Mention
-from src import bot
 
 
 class TestArticlesFeature:
-    # These tests should probably be parameterized with the different sites
-    def test_returns_article_url_from_home_url(self):
-        raise NotImplementedError
+    @pytest.mark.usefixtures("mock_random_choice")
+    def test_generated_status_is_within_tw_character_limit(
+        self, article_paragraph, article_url, article_text
+    ):
+        bot.generate_status(article_paragraph, article_url)
 
-    def test_returns_paragraph_from_article_url(self):
-        raise NotImplementedError
+        expected_status_len = len(article_text) + const.SHORTENED_URL_LENGTH
 
-    def test_generated_status_is_within_tw_character_limit(self):
-        raise NotImplementedError
+        assert expected_status_len < const.TW_CHAR_LIMIT
 
 
 class TestStocksFeature:
-    @pytest.mark.parametrize("tweet, stock_name", [
-        ("What is the price of $AMZN?", "AMZN"),
-        ("How much is $WMT right now?", "WMT")
-    ])
+    @pytest.mark.parametrize(
+        "tweet, stock_name",
+        [
+            ("What is the price of $AMZN?", "AMZN"),
+            ("How much is $WMT right now?", "WMT"),
+        ],
+    )
     def test_returns_stock_name_when_tweet_contains_stock(self, tweet, stock_name):
         assert bot.parse_stock_name(tweet) == stock_name
 
