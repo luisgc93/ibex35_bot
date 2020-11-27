@@ -68,7 +68,9 @@ def shorten_text(text):
 def reply_to_mentions():
     last_replied_mention_id = None
     if Mention.select().exists():
-        last_replied_mention_id = Mention.select().order_by(Mention.id.desc()).get().tweet_id
+        last_replied_mention_id = (
+            Mention.select().order_by(Mention.id.desc()).get().tweet_id
+        )
     api = init_tweepy()
     new_mentions = api.mentions_timeline(since_id=last_replied_mention_id)
     for mention in new_mentions:
