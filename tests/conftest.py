@@ -65,4 +65,38 @@ def twitter_user():
 def mock_get_price():
     with patch('src.bot.get_stock_price') as mock:
         mock.return_value = '$277.72'
+@pytest.fixture
+def article_paragraph():
+    return (
+        "El primer campo de batalla para confiar en unas expectativas "
+        "de ganancias que tras el shock de la pandemia se disparan es "
+        "la movilidad verde; el segundo es China. El beneficio "
+        "operativo de Volkswagen rozará los 18.000 millones en 2022, "
+        "según las mismas previsiones, lo que implica un crecimiento "
+        "del 200% desde el suelo de 2020."
+    )
+
+
+@pytest.fixture
+def article_text():
+    return (
+        "El beneficio operativo de Volkswagen rozará los 18.000 millones "
+        "en 2022, según las mismas previsiones, lo que implica un "
+        "crecimiento del 200% desde el suelo de 2020."
+    )
+
+
+@pytest.fixture
+def article_url():
+    return (
+        "'https://www.eleconomista.es/mercados-cotizaciones/noticias/"
+        "10911794/11/20/Volkswagen-Mercedes-y-BMW-saldran-de-la-crisis-"
+        "con-la-caja-en-maximos-historicos.html'"
+    )
+
+
+@pytest.fixture
+def mock_random_choice(article_text):
+    with patch("random.choice") as mock:
+        mock.return_value = article_text
         yield mock
