@@ -9,13 +9,23 @@ from src.models import Mention
 class TestArticlesFeature:
     @pytest.mark.usefixtures("mock_random_choice")
     def test_generated_status_is_within_tw_character_limit(
-        self, article_paragraph, article_url, article_text
+        self, article_paragraph, article_url, mock_tweepy
     ):
         bot.generate_status(article_paragraph, article_url)
 
-        expected_status_len = len(article_text) + const.SHORTENED_URL_LENGTH
+        expected_status = (
+            "El beneficio operativo de Volkswagen rozará los "
+            "18.000 millones en 2022, según las mismas previsiones, "
+            "lo que implica un crecimiento del 200% desde el suelo "
+            f"de 2020. {article_url}"
+        )
 
-        assert expected_status_len < const.TW_CHAR_LIMIT
+        published_status_len = (
+            len(expected_status) - len(article_url) + const.SHORTENED_URL_LENGTH
+        )
+
+        mock_tweepy.assert_has_calls([call().update_status(status=expected_status)])
+        assert published_status_len < const.TW_CHAR_LIMIT
 
 
 class TestStocksFeature:
