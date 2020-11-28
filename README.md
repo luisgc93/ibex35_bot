@@ -1,5 +1,5 @@
 # Ibex35 Bot 🤖 
-[![Build Status](https://travis-ci.org/luisgc93/ibex35_bot.svg?branch=master)](https://travis-ci.org/luisgc93/ibex35_bot)
+[![Build Status](https://travis-ci.org/luisgc93/ibex35_bot.svg?branch=master)](https://travis-ci.org/luisgc93/ibex35_bot) [![codecov](https://codecov.io/gh/luisgc93/ibex35_bot/branch/master/graph/badge.svg?token=QM9L6HQ3YQ)](https://codecov.io/gh/luisgc93/ibex35_bot)
 
 A [twitter bot](https://twitter.com/BotIbex) that posts financial news articles about [Spain's stock market index](https://en.wikipedia.org/wiki/IBEX_35). You can also ask the bot for the current price of a stock by mentioning it and adding a dollar sign followed by the stock's ticker symbol. 
 
