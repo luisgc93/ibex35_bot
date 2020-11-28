@@ -11,3 +11,4 @@ sentry_sdk
 peewee
 psycopg2
 pytest
+pytest-cov
