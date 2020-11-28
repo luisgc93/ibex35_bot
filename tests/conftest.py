@@ -70,30 +70,33 @@ def mock_get_price():
 @pytest.fixture
 def article_paragraph():
     return (
-        "El primer campo de batalla para confiar en unas expectativas "
-        "de ganancias que tras el shock de la pandemia se disparan es "
-        "la movilidad verde; el segundo es China. El beneficio "
-        "operativo de Volkswagen rozará los 18.000 millones en 2022, "
-        "según las mismas previsiones, lo que implica un crecimiento "
-        "del 200% desde el suelo de 2020."
+        "Los inversores han celebrado la noticia con una subida en bolsa"
+        " del 4,65%, lo que le ha permitido borrar las pérdidas en lo que"
+        " va de año. A falta de que sea aceptado por la Junta General "
+        "Extraordinaria de Accionistas -que se celebrará el 16 de diciembre- "
+        "el pago se abonará el 28 de diciembre por lo que el último día "
+        "para tener las acciones en cartera y recibir este dividendo es el"
+        " 23 de diciembre."
     )
 
 
 @pytest.fixture
 def article_text():
     return (
-        "El beneficio operativo de Volkswagen rozará los 18.000 millones "
-        "en 2022, según las mismas previsiones, lo que implica un "
-        "crecimiento del 200% desde el suelo de 2020."
+        "A falta de que sea aceptado por la Junta General Extraordinaria "
+        "de Accionistas -que se celebrará el 16 de diciembre- el pago se "
+        "abonará el 28 de diciembre por lo que el último día para tener "
+        "las acciones en cartera y recibir este dividendo es el dia 23 "
+        "de diciembre"
     )
 
 
 @pytest.fixture
 def article_url():
     return (
-        "'https://www.eleconomista.es/mercados-cotizaciones/noticias/"
-        "10911794/11/20/Volkswagen-Mercedes-y-BMW-saldran-de-la-crisis-"
-        "con-la-caja-en-maximos-historicos.html'"
+            "https://www.eleconomista.es/mercados-cotizaciones/noticias/"
+            "10911810/11/20/Ebroo-Foods-distribuira-un-dividendo-"
+            "extraordinario-del-10.html"
     )
 
 

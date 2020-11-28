@@ -56,7 +56,7 @@ def generate_status(para, url):
     if const.SHORTENED_URL_LENGTH + len(text) > const.TW_CHAR_LIMIT:
         text = shorten_text(text)
 
-    status = f"{text} {url}"
+    status = f"{text}{url}"
     api = init_tweepy()
     api.update_status(status=status)
 

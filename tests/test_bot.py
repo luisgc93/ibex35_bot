@@ -14,10 +14,13 @@ class TestArticlesFeature:
         bot.generate_status(article_paragraph, article_url)
 
         expected_status = (
-            "El beneficio operativo de Volkswagen rozará los "
-            "18.000 millones en 2022, según las mismas previsiones, "
-            "lo que implica un crecimiento del 200% desde el suelo "
-            f"de 2020. {article_url}"
+            "A falta de que sea aceptado por la Junta "
+            "General Extraordinaria de Accionistas -"
+            "que se celebrará el 16 de diciembre- el "
+            "pago se abonará el 28 de diciembre por lo"
+            " que el último día para tener las acciones"
+            " en cartera y recibir este dividendo es el "
+            f"dia 2(...) {article_url}"
         )
 
         published_status_len = (
@@ -25,7 +28,7 @@ class TestArticlesFeature:
         )
 
         mock_tweepy.assert_has_calls([call().update_status(status=expected_status)])
-        assert published_status_len < const.TW_CHAR_LIMIT
+        assert published_status_len <= const.TW_CHAR_LIMIT
 
 
 class TestStocksFeature:
