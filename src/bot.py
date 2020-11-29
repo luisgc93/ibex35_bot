@@ -1,5 +1,7 @@
 import random
+import sys
 from os import environ
+import argparse
 
 import nltk
 import requests
@@ -110,3 +112,33 @@ def get_stock_price(stock_name):
     full_price = data[key]["1. open"]
 
     return f"${full_price[:-2]}"
+
+
+def main():
+    args = parser.parse_args()
+    if args.tweet_article:
+        site = random.choice(const.SITES)
+        home_url = site.get("home_url")
+        xpath = site.get("xpath")
+        sys.stdout.write("TEST")
+        scrape_website(home_url, xpath)
+
+    if args.reply_mentions:
+        reply_to_mentions()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--tweet-article",
+        action="store_true",
+        dest="tweet_article",
+        help="Scrape financial sites and share an article on twitter.",
+    )
+    parser.add_argument(
+        "--reply-mentions",
+        action="store_true",
+        dest="reply_mentions",
+        help="Reply to any twitter mentions asking for a stock's price.",
+    )
+    main()
