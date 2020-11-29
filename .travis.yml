@@ -9,3 +9,5 @@ script:
   - flake8 src/*.py tests/*.py --max-line-length 88
   - black src/*.py tests/*.py
   - pytest --cov=src.bot tests/
+after_success:
+  - codecov
