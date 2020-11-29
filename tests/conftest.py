@@ -94,9 +94,9 @@ def article_text():
 @pytest.fixture
 def article_url():
     return (
-            "https://www.eleconomista.es/mercados-cotizaciones/noticias/"
-            "10911810/11/20/Ebroo-Foods-distribuira-un-dividendo-"
-            "extraordinario-del-10.html"
+        "https://www.eleconomista.es/mercados-cotizaciones/noticias/"
+        "10911810/11/20/Ebroo-Foods-distribuira-un-dividendo-"
+        "extraordinario-del-10.html"
     )
 
 
