@@ -79,23 +79,19 @@ def reply_to_mentions():
         tweet = mention.text
         user = mention.user.screen_name
         stock_name = parse_stock_name(tweet)
+        response = ""
         try:
             stock_price = get_stock_price(stock_name)
             response = f"Las acciones de ${stock_name} cotizan a {stock_price}."
-            api.update_status(
-                status=f"@{user} {response}", in_reply_to_status_id=mention.id
-            )
         except ValueError as e:
             if const.API_LIMIT_EXCEEDED_MESSAGE in str(e):
                 response = const.API_LIMIT_EXCEEDED_RESPONSE
-                api.update_status(
-                    status=f"@{user} {response}", in_reply_to_status_id=mention.id
-                )
             elif const.STOCK_NOT_FOUND_MESSAGE in str(e):
                 response = const.STOCK_NOT_FOUND_RESPONSE
-                api.update_status(
-                    status=f"@{user} {response}", in_reply_to_status_id=mention.id
-                )
+
+        api.update_status(
+            status=f"@{user} {response}", in_reply_to_status_id=mention.id
+        )
 
 
 def parse_stock_name(string):
