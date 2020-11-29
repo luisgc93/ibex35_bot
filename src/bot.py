@@ -120,7 +120,6 @@ def main():
         site = random.choice(const.SITES)
         home_url = site.get("home_url")
         xpath = site.get("xpath")
-        sys.stdout.write("TEST")
         scrape_website(home_url, xpath)
 
     if args.reply_mentions:
