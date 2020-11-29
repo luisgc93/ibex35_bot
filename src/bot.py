@@ -77,36 +77,37 @@ def reply_to_mentions():
     for mention in new_mentions:
         Mention(tweet_id=mention.id).save()
         tweet = mention.text
-        if "$" in tweet:
-            user = mention.user.screen_name
-            stock_name = parse_stock_name(tweet)
+        user = mention.user.screen_name
+        stock_name = parse_stock_name(tweet)
+        try:
             stock_price = get_stock_price(stock_name)
-            if not stock_price:
-                response = const.STOCK_NOT_FOUND_RESPONSE
-            elif stock_price == "API rate exceeded":
-                response = const.API_LIMIT_EXCEEDED_RESPONSE
-            else:
-                response = f"Las acciones de ${stock_name} cotizan a {stock_price}."
-
+            response = f"Las acciones de ${stock_name} cotizan a {stock_price}."
             api.update_status(
                 status=f"@{user} {response}", in_reply_to_status_id=mention.id
             )
+        except ValueError as e:
+            if const.API_LIMIT_EXCEEDED_MESSAGE in str(e):
+                response = const.API_LIMIT_EXCEEDED_RESPONSE
+                api.update_status(
+                    status=f"@{user} {response}", in_reply_to_status_id=mention.id
+                )
+            elif const.STOCK_NOT_FOUND_MESSAGE in str(e):
+                response = const.STOCK_NOT_FOUND_RESPONSE
+                api.update_status(
+                    status=f"@{user} {response}", in_reply_to_status_id=mention.id
+                )
 
 
 def parse_stock_name(string):
+    if "$" not in string:
+        return
     name = string.split("$")[1].split(" ")[0]
     return "".join([x for x in name if x.isalpha()])
 
 
 def get_stock_price(stock_name):
     ts = TimeSeries(key=environ["ALPHA_VANTAGE_API_KEY"])
-    try:
-        data, meta_data = ts.get_intraday(stock_name)
-    except ValueError as e:
-        if const.API_LIMIT_EXCEEDED_MESSAGE in str(e):
-            return "API rate exceeded"
-        return
-
+    data, meta_data = ts.get_intraday(stock_name)
     key = list(data.keys())[0]
     full_price = data[key]["1. open"]
 
