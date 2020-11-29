@@ -1,10 +1,12 @@
 .idea
 *.pyc
+
 /staticfiles/
 /static/
 
 .venv
 venv/
 
+*.env
+
 src/credentials.py
-.env
