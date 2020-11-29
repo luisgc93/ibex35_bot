@@ -4,6 +4,10 @@ help:
 install-requirements: ## Push and open github pull request page
 	pip install -r requirements.txt
 
+make linting:
+	flake8 src/*.py tests/*.py --max-line-length 88
+	black src/*.py tests/*.py
+
 test: ## Run tests and generate coverage report
 	pytest --cov=src tests/
 
