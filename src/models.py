@@ -17,3 +17,11 @@ class Mention(BaseModel):
 
     class Meta:
         table_name = "mentions"
+
+
+def migrate():
+    db.create_tables([Mention])
+
+
+if __name__ == "__main__":
+    migrate()
