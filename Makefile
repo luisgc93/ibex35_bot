@@ -4,7 +4,7 @@ help:
 install-requirements: ## Push and open github pull request page
 	pip install -r requirements.txt
 
-make linting:
+linting: ## Check/Enforce Python Code-Style
 	flake8 src/*.py tests/*.py --max-line-length 88
 	black src/*.py tests/*.py
 
