@@ -42,6 +42,11 @@ API_LIMIT_EXCEEDED_RESPONSE = (
     "Vuelve a probar más tarde."
 )
 
+STOCK_NOT_FOUND_MESSAGE = (
+    "Invalid API call. Please retry or visit the documentation "
+    "(https://www.alphavantage.co/documentation/) for TIME_SERIES_INTRADAY."
+)
+
 STOCK_NOT_FOUND_RESPONSE = (
     "Disculpa, solo puedo buscar acciones que cotizan en el NASDAQ, "
     "lo que excluye ciertas empresas del IBEX 😓: "
