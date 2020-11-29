@@ -12,3 +12,4 @@ peewee
 psycopg2
 pytest
 pytest-cov
+codecov
