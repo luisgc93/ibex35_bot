@@ -6,7 +6,7 @@ from src import bot, const
 from src.models import Mention
 
 
-class TestArticlesFeature:
+class TestBot:
     @pytest.mark.usefixtures("mock_random_choice")
     def test_generated_status_is_within_tw_character_limit(
         self, article_paragraph, article_url, mock_tweepy
@@ -30,8 +30,6 @@ class TestArticlesFeature:
         mock_tweepy.assert_has_calls([call().update_status(status=expected_status)])
         assert published_status_len <= const.TW_CHAR_LIMIT
 
-
-class TestStocksFeature:
     @pytest.mark.parametrize(
         "tweet, stock_name",
         [
