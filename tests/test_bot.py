@@ -30,16 +30,6 @@ class TestBot:
         mock_tweepy.assert_has_calls([call().update_status(status=expected_status)])
         assert published_status_len <= const.TW_CHAR_LIMIT
 
-    @pytest.mark.parametrize(
-        "tweet, stock_name",
-        [
-            ("What is the price of $AMZN?", "AMZN"),
-            ("How much is $WMT right now?", "WMT"),
-        ],
-    )
-    def test_returns_stock_name_when_tweet_contains_stock(self, tweet, stock_name):
-        assert bot.parse_stock_name(tweet) == stock_name
-
     @pytest.mark.usefixtures("mock_get_price", "mock_new_mention")
     def test_updates_status_when_mention_is_new(self, mock_tweepy):
         bot.reply_to_mentions()
@@ -80,3 +70,52 @@ class TestBot:
         bot.reply_to_mentions()
 
         assert update_status_call not in mock_tweepy.mock_calls
+
+    @pytest.mark.parametrize(
+        "tweet, stock_name",
+        [
+            ("What is the price of $AMZN?", "AMZN"),
+            ("How much is $WMT right now?", "WMT"),
+        ],
+    )
+    def test_returns_stock_name_when_tweet_contains_dollar_sign(
+        self, tweet, stock_name
+    ):
+        assert bot.parse_stock_name(tweet) == stock_name
+
+    def test_returns_none_when_tweet_does_not_contain_stock_name(self):
+        tweet = "Hello bot, what stock should I buy?"
+
+        assert bot.parse_stock_name(tweet) is None
+
+    @pytest.mark.usefixtures("mock_alpha_vantage_get_intra_day")
+    def test_returns_stock_price_with_two_decimal_places(self):
+        price = bot.get_stock_price("BABA")
+
+        assert price == "$276.80"
+
+    @pytest.mark.usefixtures(
+        "mock_mention_with_invalid_stock_name", "mock_alpha_vantage_stock_not_found"
+    )
+    def test_publishes_error_response_when_stock_name_not_found(self, mock_tweepy):
+        expected_status_call = call().update_status(
+            status=f"@user_name {const.STOCK_NOT_FOUND_RESPONSE}",
+            in_reply_to_status_id=1,
+        )
+
+        bot.reply_to_mentions()
+
+        assert expected_status_call in mock_tweepy.mock_calls
+
+    @pytest.mark.usefixtures(
+        "mock_alpha_vantage_max_retries_exceeded", "mock_new_mention"
+    )
+    def test_publishes_error_response_when_max_retries_exceeded(self, mock_tweepy):
+        expected_status_call = call().update_status(
+            status=f"@user_name {const.API_LIMIT_EXCEEDED_RESPONSE}",
+            in_reply_to_status_id=1,
+        )
+
+        bot.reply_to_mentions()
+
+        assert expected_status_call in mock_tweepy.mock_calls
