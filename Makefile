@@ -4,18 +4,19 @@ DOCKER_COMPOSE_FILE := $(PROJECT_ROOT_FOLDER)/docker/docker-compose.yml
 install-requirements: ## Install project requirements
 	pip install -r requirements.txt
 
-## You'll need a command to spin create and run the image and also run migrations (create mentions table)
-env-start:
+env-start: ## Start project containers defined in docker-compose
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
 
-env-stop:
+env-stop: ## Stop project containers defined in docker-compose
 	docker-compose -f $(DOCKER_COMPOSE_FILE) stop
 
-env-destroy:
+env-destroy: ## Destroy all project containers
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down -v --rmi local --remove-orphans
 
-migrate:
+migrate: ## Create mentions table
 	docker-compose -f $(DOCKER_COMPOSE_FILE) exec -T worker python -m src.models
+
+env-recreate: env-destroy env-start migrate ## Destroy project containers, start them again and run migrations
 
 linting: ## Check/Enforce Python Code-Style
 	flake8 src/*.py tests/*.py --max-line-length 88
