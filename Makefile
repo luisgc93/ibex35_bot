@@ -23,7 +23,7 @@ linting: ## Check/Enforce Python Code-Style
 	black src/*.py tests/*.py
 
 test: ## Run tests and generate coverage report
-	pytest --cov=src tests/
+	pytest --cov=src.bot tests/
 
 tweet-article: ## Scrape one of the defined sites and share the article on twitter
 	docker-compose -f $(DOCKER_COMPOSE_FILE) exec -T worker python -m src.bot --tweet-article
