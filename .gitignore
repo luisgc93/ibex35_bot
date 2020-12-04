@@ -10,3 +10,7 @@ venv/
 *.env
 
 src/credentials.py
+
+*.xml
+*.db
+*.coverage
