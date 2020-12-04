@@ -97,7 +97,7 @@ class TestBot:
     @pytest.mark.usefixtures(
         "mock_mention_with_invalid_stock_name", "mock_alpha_vantage_stock_not_found"
     )
-    def test_publishes_error_response_when_stock_name_not_found(self, mock_tweepy):
+    def test_publishes_custom_error_response_when_stock_name_not_found(self, mock_tweepy):
         expected_status_call = call().update_status(
             status=f"@user_name {const.STOCK_NOT_FOUND_RESPONSE}",
             in_reply_to_status_id=1,
@@ -110,7 +110,7 @@ class TestBot:
     @pytest.mark.usefixtures(
         "mock_alpha_vantage_max_retries_exceeded", "mock_new_mention"
     )
-    def test_publishes_error_response_when_max_retries_exceeded(self, mock_tweepy):
+    def test_publishes_custom_error_response_when_max_retries_exceeded(self, mock_tweepy):
         expected_status_call = call().update_status(
             status=f"@user_name {const.API_LIMIT_EXCEEDED_RESPONSE}",
             in_reply_to_status_id=1,
