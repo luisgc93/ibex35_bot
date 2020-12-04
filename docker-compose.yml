@@ -1,13 +1,13 @@
 version: '3.7'
 services:
   worker:
-    build: ..
+    build: .
     env_file:
       - envfiles/local.env
     stdin_open: true
     tty: true
     volumes:
-      - '../src:/worker/src'
+      - './src:/worker/src'
     ports:
       - 8000:8000
   db:

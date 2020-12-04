@@ -1,5 +1,5 @@
 PROJECT_ROOT_FOLDER := $(shell pwd)
-DOCKER_COMPOSE_FILE := $(PROJECT_ROOT_FOLDER)/docker/docker-compose.yml
+DOCKER_COMPOSE_FILE := $(PROJECT_ROOT_FOLDER)/docker-compose.yml
 
 install-requirements: ## Install project requirements
 	pip install -r requirements.txt
