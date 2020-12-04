@@ -1,4 +1,4 @@
 build:
   docker:
-    context: .
-    clock: /docker/Dockerfile
+    context: ./docker/
+    clock: Dockerfile
