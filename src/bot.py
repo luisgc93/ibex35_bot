@@ -67,13 +67,8 @@ def shorten_text(text):
 
 
 def reply_to_mentions():
-    last_replied_mention_id = None
-    if Mention.select().exists():
-        last_replied_mention_id = (
-            Mention.select().order_by(Mention.id.desc()).get().tweet_id
-        )
     api = init_tweepy()
-    new_mentions = api.mentions_timeline(since_id=last_replied_mention_id)
+    new_mentions = api.mentions_timeline(since_id=get_last_replied_mention_id())
     for mention in new_mentions:
         Mention(tweet_id=mention.id).save()
         tweet = mention.text
@@ -92,6 +87,15 @@ def reply_to_mentions():
         api.update_status(
             status=f"@{user} {response}", in_reply_to_status_id=mention.id
         )
+
+
+def get_last_replied_mention_id():
+    if not Mention.select().exists():
+        return
+    last_replied_mention_id = (
+        Mention.select().order_by(Mention.id.desc()).get().tweet_id
+    )
+    return last_replied_mention_id
 
 
 def parse_stock_name(string):
