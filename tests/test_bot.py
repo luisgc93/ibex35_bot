@@ -78,7 +78,7 @@ class TestBot:
             ("How much is $WMT right now?", "WMT"),
         ],
     )
-    def test_returns_stock_name_when_tweet_contains_dollar_sign(
+    def test_returns_stock_name_when_tweet_contains_cash_tag_sign(
         self, tweet, stock_name
     ):
         assert bot.parse_stock_name(tweet) == stock_name

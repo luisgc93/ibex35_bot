@@ -95,7 +95,7 @@ def reply_to_mentions():
 
 
 def parse_stock_name(string):
-    if "$" not in string:
+    if const.CASHTAG not in string:
         return
     name = string.split("$")[1].split(" ")[0]
     return "".join([x for x in name if x.isalpha()])
