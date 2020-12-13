@@ -10,6 +10,8 @@ MAX_TRUNCATED_CHARACTER_COUNT = (
     TW_CHAR_LIMIT - SHORTENED_URL_LENGTH - len(TRUNCATED_TEXT_STRING)
 )
 
+CASHTAG = "$"
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4)"
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) "
